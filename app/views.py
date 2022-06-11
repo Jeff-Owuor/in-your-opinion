@@ -28,3 +28,5 @@ def loginPage(request):
     
     return render(request,'registration/login.html',context)
 
+def index(request):
+    return render(request,'app/index.html',{})
