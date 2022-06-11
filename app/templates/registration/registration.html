@@ -1,0 +1,35 @@
+{%extends "registration/base.html"%}
+{% load bootstrap4 %}
+{% block content %}
+<form action="" class="signup-form" method="post">
+    {% csrf_token %}
+    <div class="container" style="margin-top:5%">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-9">
+                <section class=" signup-form-container ">
+                    <article class="signup-form-title ">
+                        <h1>Quantify skill by the evidence</h1>
+                    </article>
+                    <article class="signup-form-description ">
+                        <h4>Sign up to see post and also review projects.</h4>
+                    </article>
+                        {{ form.as_p }}
+                    <article class="signup-form-submit ">
+                        <button type="submit ">Sign up</button>
+                    </article>
+                    <article class="signup-form-terms ">
+                        <p>By signing up, you agree to our <strong>Terms</strong>,<strong>Data</strong>,<strong>Policy</strong> and <strong>Cookies Policy.</strong></p>
+                    </article>
+                </section>
+                {{ form.errors }}
+                <article class="signup-login ">
+                    <p>Have an account? <a href="{% url 'login' %} ">Log in</a></p>
+                </article>
+            </div>
+        </div>
+    </div>
+   
+</form>
+
+{% endblock %}
