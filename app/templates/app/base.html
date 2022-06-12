@@ -13,14 +13,14 @@
   {% endif %}
 
   {% block styles %}
-    {% bootstrap_css %}
+      {% bootstrap_css %}
   {% endblock %}
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     {% include "app/navbar.html" %}
     {% block content %}
-     <h1 class='text-center'>Double Tap</h1> 
      {%endblock%}
 
     {% block scripts %}

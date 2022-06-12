@@ -2,7 +2,23 @@
 {% load bootstrap4 %}
 {% load static %}
 
+
+{% block styles %}
+{% bootstrap_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
 {% block content %}
 
-  <h1>Quantify skill by the evidence</h1>
+  <h1 class="text-center">Quantify skill by the evidence</h1>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
 {%endblock%}
+
+{% block scripts %}
+{{block.super}}
+<script type="text/javascript" src="{% static 'js/main.js'%}"></script>
+{% endblock %}
