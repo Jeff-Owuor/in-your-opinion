@@ -1,10 +1,18 @@
 {%extends "registration/base.html"%}
 {% load bootstrap4 %}
+
+{% load static %}
+
+{% block styles %}
+{% bootstrap_css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-10">
-            <form action="" class="signup-form" method="post" style="display:flex;flex-direction:column;justify-content:center;align-items:center;margin-top: 7%;">
+<div class="containerEl">
+    <h1 class="text-center">Quantify skill by the evidence</h1>
+            <form action="" class="signup-form" method="post">
                 {% csrf_token %}
                  {% for field in form %}
                     <span style="margin:4px">{{ field.label }}:  {{ field }} </span>
@@ -16,9 +24,6 @@
                
             </form>
 
-            
-        </div>
-    </div>
 </div>
 
 

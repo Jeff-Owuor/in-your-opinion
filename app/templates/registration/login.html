@@ -19,9 +19,9 @@
                     <form method="POST" action="">
                         {% csrf_token %}
                         
-                          Username:  <input type="text" name="username" placeholder="Username ..." class="form-control">
+                          <span>Username: </span> <input type="text" name="username" placeholder="Username ..." class="form-control">
                           Password:  <input type="password" name="password" placeholder="Password ..." class="form-control">
-                          <button type="submit">Login</button>
+                          <input type="submit" value="login" class="btn btn-secondary">
                           <p>Don't have an account? <a href="{% url 'register' %}" style="display:inline">Sign up</a></p>
                     </form>
                  </div>
