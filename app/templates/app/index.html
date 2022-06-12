@@ -10,16 +10,28 @@
 
 {% block content %}
 
-  <h1 class="text-center">Quantify skill by the evidence</h1>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star"></span>
-<span class="fa fa-star"></span>
+    <h1 class="text-center">Quantify skill by the evidence</h1>
+    <div class="row">
+      <div class="col text-center"></div>
+      <div class="col text-center">
+        <form action="" method="POST" class="rate-form">
+          {% csrf_token %}
+          <button type="submit" class="fa fa-star fa-3x checked"  id="first"></button>
+          <button  type="submit" class="fa fa-star fa-3x checked" id="second"></button>
+          <button  type="submit" class="fa fa-star fa-3x checked" id="third"></button>
+          <button  type="submit" class="fa fa-star fa-3x" id="fourth"></button>
+          <button  type="submit" class="fa fa-star fa-3x" id="fifth"></button>
+        </form>
+      </div>
+
+      <div id="confirm-box"></div>
+
+    </div>
+
 {%endblock%}
 
 {% block scripts %}
 {{block.super}}
-<script type="text/javascript" src="{% static 'js/main.js'%}"></script>
+   <script type="text/javascript" src="{% static 'js/home.js'%}"></script>
 {% endblock %}
 

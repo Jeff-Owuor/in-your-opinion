@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .forms import RegisterForm
 from django.contrib.auth import logout,login,authenticate
+from .models import Projects,Profile
 
 def register(request):
     form = RegisterForm()
@@ -29,4 +30,8 @@ def loginPage(request):
     return render(request,'registration/login.html',context)
 
 def index(request):
-    return render(request,'app/index.html',{})
+    obj = Projects.objects.filter(score=0).order_by('?').first()
+    context = {
+        'object':obj,
+    }
+    return render(request,'app/index.html',context)
