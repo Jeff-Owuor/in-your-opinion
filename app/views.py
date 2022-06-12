@@ -72,3 +72,16 @@ def projectUpload(request):
             "form":form
             }
     return render(request, 'app/post.html', context)
+
+@login_required(login_url='login/')
+def profile(request, id):
+    profile = Profile.objects.get(user=id)
+    userid = request.user.id
+    user_posts = profile.images_set.all()
+    
+    context={
+        "profile":profile,
+        "userid":userid,
+        'user_posts': user_posts,
+    }
+    return render(request, 'app/user_profile.html',context)

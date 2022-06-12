@@ -1,0 +1,24 @@
+{%extends "app/base.html"%}
+{%load bootstrap4%}
+
+{% block content %}
+<h1>My profile</h1>
+
+<div class="container">
+    <div class="row">
+     <div class="col-md-4">
+        <div class="card" style="width: 24rem;">
+            <img src="{{user.profile.profile_photo.url}}" alt="" srcset="">
+            <div class="card-body">
+              <h5 class="card-title" style="color:black">{{ user.username }}</h5>
+              <p class="card-text" style="color:black">{{ user.profile.bio }}</p>
+              <a href="{{ user.github }}"><i class="fa-brands fa-github"></i></a>
+              <a href="{{ user.instagram }}"><i class="fa-brands fa-instagram"></i></a>
+              <a href="{{ user.linkedin }}"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+     </div>
+    </div>
+</div>
+
+{%endblock%}

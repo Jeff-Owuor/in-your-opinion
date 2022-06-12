@@ -1,5 +1,5 @@
 from django.urls import re_path,path
-from .views import register,index,loginPage,rate_image,projectUpload,logout_user
+from .views import register,index,loginPage,rate_image,projectUpload,logout_user,profile
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -10,6 +10,7 @@ urlpatterns = [
     path('rate/',rate_image,name='rate-view'),
     path('post/', projectUpload ,  name='projectUpload'),
     path('logout/',logout_user,name='logout'),
+    path('profile/<int:id>/', profile, name="profile"),
 ]
 
 if settings.DEBUG:
