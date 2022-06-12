@@ -1,7 +1,16 @@
 {%extends "registration/base.html"%}
 {% load bootstrap4 %}
+{% load static %}
+
+{% block styles %}
+{% bootstrap_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+
 {% block content %}
-<form class="login-form" method="post" style="margin-top:5%">
+<div class="box">
+<form class="login-form" method="post">
     <section class="login-form-container" >
             <h1 class="text-center">Quantify skill by the evidence</h1>
          <div class="container">
@@ -9,10 +18,11 @@
                  <div class="col-md-6">
                     <form method="POST" action="">
                         {% csrf_token %}
-                          <input type="text" name="username" placeholder="Username ..." class="form-control">
-                          <input type="password" name="password" placeholder="Password ..." class="form-control">
-                          <input type="submit" value="Login">
-                          <p>Don't have an account? <a href="{% url 'register' %}">Sign up</a></p>
+                        
+                          Username:  <input type="text" name="username" placeholder="Username ..." class="form-control">
+                          Password:  <input type="password" name="password" placeholder="Password ..." class="form-control">
+                          <button type="submit">Login</button>
+                          <p>Don't have an account? <a href="{% url 'register' %}" style="display:inline">Sign up</a></p>
                     </form>
                  </div>
              </div>
@@ -20,4 +30,5 @@
        
     </section>
 </form>
+</div>
 {% endblock %}

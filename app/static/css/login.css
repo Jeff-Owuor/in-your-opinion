@@ -1,0 +1,33 @@
+body{
+    display:flex;
+    margin:0;
+    height:100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.box{
+    display:flex;
+    flex-direction: column;
+    border:2px solid black;
+    padding:2rem;
+    border-radius:16px;
+    box-shadow: 0 0 4px 4px rgba(0,0,0,0.2);
+}
+
+.box > input{
+    border:2px solid #000000;
+    border-radius:8px;
+    padding:0 16px;
+    height: 36px;
+    margin-bottom:5px;
+}
+
+.box > button {
+    background-color: black;
+    border:0;
+    border-radius: 8px;
+    height:36px;
+    color:white;
+    margin-top: 3px;
+}
