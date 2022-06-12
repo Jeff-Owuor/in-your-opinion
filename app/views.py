@@ -30,6 +30,10 @@ def loginPage(request):
     
     return render(request,'registration/login.html',context)
 
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+
 def index(request):
     obj = Projects.objects.filter(score=0).order_by('?').first()
     context = {
