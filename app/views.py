@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
-from .forms import RegisterForm
+from .forms import RegisterForm,UploadProjectForm
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout,login,authenticate
 from .models import Projects,Profile
 from django.http import JsonResponse
@@ -53,3 +54,21 @@ def rate_image(request):
         return JsonResponse({"success":'true','score':val}, safe=False)
     
     return JsonResponse({'success':'false'})
+
+@login_required(login_url='login/')
+def projectUpload(request):
+    current_user  = request.user
+    profile_instance = Profile.objects.get(user=current_user)
+    if request.method =='POST':
+        form = UploadProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.user = profile_instance
+            project.save()
+        return redirect('home')
+    else:
+        form  = UploadProjectForm()
+        context  = {
+            "form":form
+            }
+    return render(request, 'app/post.html', context)
