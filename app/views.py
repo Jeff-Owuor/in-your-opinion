@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import RegisterForm
 from django.contrib.auth import logout,login,authenticate
 from .models import Projects,Profile
+from django.http import JsonResponse
 
 def register(request):
     form = RegisterForm()
@@ -35,3 +36,16 @@ def index(request):
         'object':obj,
     }
     return render(request,'app/index.html',context)
+
+
+def rate_image(request):
+    if request.method == 'POST':
+        element_id = request.post.get('element_id')
+        val = request.post.get('val')
+        obj = Projects.objects.get(id = element_id)
+        obj.score = val
+        obj.save()
+        
+        return JsonResponse({"success":'true','score':val}, safe=False)
+    
+    return JsonResponse({'success':'false'})

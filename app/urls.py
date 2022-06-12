@@ -1,5 +1,5 @@
 from django.urls import re_path,path
-from .views import register,index,loginPage
+from .views import register,index,loginPage,rate_image
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -7,6 +7,7 @@ urlpatterns = [
     re_path(r'^$', index , name='home'),
     path('register/', register, name='register'),
     path('login/', loginPage, name='login'),
+    path('rate/',rate_image,name='rate-view')
 ]
 
 if settings.DEBUG:
