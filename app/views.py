@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout,login,authenticate
 from .models import Projects,Profile
 from django.http import JsonResponse
+from django.views.generic.edit import CreateView,UpdateView
+from django.urls import reverse_lazy
 
 def register(request):
     form = RegisterForm()
@@ -85,3 +87,10 @@ def profile(request, id):
         'user_posts': user_posts,
     }
     return render(request, 'app/user_profile.html',context)
+
+
+class EditProfileView(UpdateView):
+    model = Profile
+    template_name = 'app/edit.html'
+    fields = ['bio','profile_photo','github','instagram','linkedin']
+    success_url = reverse_lazy('home')
