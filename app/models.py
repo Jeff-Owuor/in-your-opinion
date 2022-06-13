@@ -46,3 +46,5 @@ class Review(models.Model):
     project = models.ForeignKey(Projects,on_delete=models.CASCADE)
     body = models.TextField()
     rate_design = models.PositiveSmallIntegerField(choices=RATE_CHOICES)
+    rate_context = models.PositiveSmallIntegerField(choices=RATE_CHOICES,default=0)
+    rate_usability = models.PositiveSmallIntegerField(choices=RATE_CHOICES,default=0)

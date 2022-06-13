@@ -26,3 +26,19 @@ class RateForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ('body','rate_design')
+        
+class RateContextForm(forms.ModelForm):
+    body = forms.CharField(widget=forms.Textarea(attrs={'class':'materialize-textarea'}),required=False)
+    rate_context = forms.ChoiceField(choices=RATE_CHOICES,required=True,widget=forms.Select())
+    
+    class Meta:
+        model = Review
+        fields = ('body','rate_context')
+        
+class RateUsabilityForm(forms.ModelForm):
+    body = forms.CharField(widget=forms.Textarea(attrs={'class':'materialize-textarea'}),required=False)
+    rate_usability = forms.ChoiceField(choices=RATE_CHOICES,required=True,widget=forms.Select())
+    
+    class Meta:
+        model = Review
+        fields = ('body','rate_usability')

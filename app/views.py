@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import RegisterForm,UploadProjectForm,RateForm
+from .forms import RegisterForm,UploadProjectForm,RateForm,RateUsabilityForm,RateContextForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout,login,authenticate
 from .models import Projects,Profile
@@ -123,4 +123,29 @@ def rate_design(request,id):
     }
     
     return render(request, 'app/rate_design.html',context)
+
+def rate_context(request,id):
+    project = Projects.objects.get(id=id)
+    user = request.user
+    
+    if request.method =='POST':
+        form = RateContextForm(request.POST)
+        
+        if form.is_valid():
+            rate_design = form.save(commit=False)
+            rate_design.user = user
+            rate_design.project = project
+            rate_design.save()
+            return redirect('home')
+        
+    else:
+        form = RateContextForm()
+        
+        
+    context ={
+        'form':form,
+        'project':project
+    }
+    
+    return render(request, 'app/rate_context.html',context)
      
