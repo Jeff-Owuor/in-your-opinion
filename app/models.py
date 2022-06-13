@@ -27,3 +27,22 @@ class Projects(models.Model):
     
     def __str__(self):
         return str(self.pk)
+    
+RATE_CHOICES =[
+     (1, '1 - Trash'),
+     (2, '2 - Horrible'),
+     (3, '3 - Terrible'),
+     (4, '4 - Bad'),
+     (5, '5 - Ok'),
+     (6, '6 - Satisfactory'),
+     (7, '7 - Good'),
+     (8, '8 - Amazing'),
+     (9, '9 - Perfect'),
+     (10, '10 - Master Piece')
+ ]
+    
+class Review(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    project = models.ForeignKey(Projects,on_delete=models.CASCADE)
+    body = models.TextField()
+    rate_design = models.PositiveSmallIntegerField(choices=RATE_CHOICES)

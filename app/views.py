@@ -38,9 +38,11 @@ def logout_user(request):
     return redirect('login')
 
 def index(request):
-    obj = Projects.objects.filter(score=0).order_by('?').first()
+    projects = Projects.objects.all()
+    obj = Projects.objects.filter(score=0)
     context = {
         'object':obj,
+        'projects':projects
     }
     return render(request,'app/index.html',context)
 
@@ -79,7 +81,7 @@ def projectUpload(request):
 def profile(request, id):
     profile = Profile.objects.get(user=id)
     userid = request.user.id
-    user_posts = profile.images_set.all()
+    user_posts = profile.projects_set.all()
     
     context={
         "profile":profile,
