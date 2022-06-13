@@ -20,17 +20,7 @@
             <h5 class="card-title">{{project.project_title}}</h5>
             <p class="card-text">{{ project.project_description }}</p>
             <a href="{{ project.site_link }}" >Live Site Link</a>
-            <div class="col text-center">
-              <form action="" method="POST" class="rate-form" id="{{ object.id }}">
-                {% csrf_token %}
-                <button type="submit" class="fa fa-star fa-3x"  id="first"></button>
-                <button  type="submit" class="fa fa-star fa-3x" id="second"></button>
-                <button  type="submit" class="fa fa-star fa-3x" id="third"></button>
-                <button  type="submit" class="fa fa-star fa-3x" id="fourth"></button>
-                <button  type="submit" class="fa fa-star fa-3x" id="fifth"></button>
-              </form>
-              <h3 id="confirm-box"></h3>
-            </div>
+            <a href="{% url 'rate_design' project.id %}" class="btn"><i class="fa fa-star" aria-hidden="true"></i>Rate_design</a>
           </div>
         </div>
         {% endfor %}

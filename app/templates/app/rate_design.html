@@ -1,0 +1,27 @@
+{%extends "app/base.html"%}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block styles %}
+{% bootstrap_css %}
+<link rel="stylesheet" href="{% static 'css/rate_design.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="containerElement">
+<div class="vertical-center">
+      <form action="" method="POST" id="form">
+        {% csrf_token %}
+          <div class="input-field">
+              Rate Design - {{ form.rate_design }}
+          </div>
+          <div class="input-field">
+              Review - {{ form.body }}
+          </div>
+
+          <button type="submit" class="btn btn-secondary">Rate</i</button>
+      </form>
+</div>
+</div>
+{% endblock %}
