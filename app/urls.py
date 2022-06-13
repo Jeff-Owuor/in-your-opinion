@@ -1,5 +1,5 @@
 from django.urls import re_path,path
-from .views import register,index,loginPage,rate_image,projectUpload,logout_user,profile,EditProfileView,rate_design,rate_context
+from .views import register,index,loginPage,rate_image,projectUpload,logout_user,profile,EditProfileView,rate_design,rate_context,rate_usability
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -13,7 +13,8 @@ urlpatterns = [
     path('profile/<int:id>/', profile, name="profile"),
     path('edit/<int:pk>/',EditProfileView.as_view(), name="edit"),
     path('rate_design/<int:id>',rate_design,name='rate_design'),
-    path('rate_context/<int:id>',rate_context,name='rate_context')
+    path('rate_context/<int:id>',rate_context,name='rate_context'),
+    path('rate_usability/<int:id>',rate_usability,name='rate_usability'),
 ]
 
 if settings.DEBUG:

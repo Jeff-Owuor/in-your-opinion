@@ -22,6 +22,7 @@
             <a href="{{ project.site_link }}" >Live Site Link</a>
             <a href="{% url 'rate_design' project.id %}" class="btn"><i class="fa fa-star" aria-hidden="true"></i>Rate_design</a>
             <a href="{% url 'rate_context' project.id %}" class="btn"><i class="fa fa-star" aria-hidden="true"></i>Rate_context</a>
+            <a href="{% url 'rate_usability' project.id %}" class="btn"><i class="fa fa-star" aria-hidden="true"></i>Rate_usability</a>
           </div>
         </div>
         {% endfor %}

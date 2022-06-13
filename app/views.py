@@ -148,4 +148,29 @@ def rate_context(request,id):
     }
     
     return render(request, 'app/rate_context.html',context)
+
+def rate_usability(request,id):
+    project = Projects.objects.get(id=id)
+    user = request.user
+    
+    if request.method =='POST':
+        form = RateUsabilityForm(request.POST)
+        
+        if form.is_valid():
+            rate_design = form.save(commit=False)
+            rate_design.user = user
+            rate_design.project = project
+            rate_design.save()
+            return redirect('home')
+        
+    else:
+        form = RateUsabilityForm()
+        
+        
+    context ={
+        'form':form,
+        'project':project
+    }
+    
+    return render(request, 'app/rate_usability.html',context)
      
