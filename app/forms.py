@@ -15,30 +15,17 @@ class UploadProjectForm(forms.ModelForm):
     class Meta:
             model = Projects
             fields = '__all__'
-            exclude = ['user','score']
-            
-            
-            
-class RateForm(forms.ModelForm):
-    body = forms.CharField(widget=forms.Textarea(attrs={'class':'materialize-textarea'}),required=False)
-    rate_design = forms.ChoiceField(choices=RATE_CHOICES,required=True,widget=forms.Select())
-    
-    class Meta:
-        model = Review
-        fields = ('body','rate_design')
+            exclude = ['user','score']    
         
-class RateContextForm(forms.ModelForm):
-    body = forms.CharField(widget=forms.Textarea(attrs={'class':'materialize-textarea'}),required=False)
-    rate_context = forms.ChoiceField(choices=RATE_CHOICES,required=True,widget=forms.Select())
-    
-    class Meta:
-        model = Review
-        fields = ('body','rate_context')
-        
-class RateUsabilityForm(forms.ModelForm):
+class RatingsForm(forms.ModelForm):
     body = forms.CharField(widget=forms.Textarea(attrs={'class':'materialize-textarea'}),required=False)
     rate_usability = forms.ChoiceField(choices=RATE_CHOICES,required=True,widget=forms.Select())
+    rate_content = forms.ChoiceField(choices=RATE_CHOICES,required=True,widget=forms.Select())
+    rate_design= forms.ChoiceField(choices=RATE_CHOICES,required=True,widget=forms.Select())
     
     class Meta:
         model = Review
-        fields = ('body','rate_usability')
+        fields = ['body','rate_design', 'rate_usability', 'rate_content']    
+        
+        
+        

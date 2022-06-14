@@ -4,7 +4,7 @@
 
 {% block styles %}
 {% bootstrap_css %}
-<link rel="stylesheet" href="{% static 'css/rate_design.css' %}">
+<link rel="stylesheet" href="{% static 'css/rate_project.css' %}">
 {% endblock %}
 
 
@@ -14,10 +14,12 @@
       <form action="" method="POST" id="form">
         {% csrf_token %}
           <div class="input-field">
-              Rate Design - {{ form.rate_design }}
+             <span style="display:block; margin-top:4px">rate usability - {{ ratingform.rate_usability }}</span>
+             <span style="display:block; margin-top:4px"> rate content - {{ ratingform.rate_content }}</span>
+             <span style="display:block; margin-top:4px">rate content - {{ ratingform.rate_design }}</span>
           </div>
           <div class="input-field">
-              Review - {{ form.body }}
+             review - {{ ratingform.body }}
           </div>
 
           <button type="submit" class="btn btn-secondary">Rate</i</button>

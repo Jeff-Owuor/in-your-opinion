@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import RegisterForm,UploadProjectForm,RateForm,RateUsabilityForm,RateContextForm
+from .forms import RegisterForm,UploadProjectForm,RatingsForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout,login,authenticate
 from .models import Projects,Profile
@@ -97,64 +97,14 @@ class EditProfileView(UpdateView):
     fields = ['bio','profile_photo','github','instagram','linkedin']
     success_url = reverse_lazy('home')
     
-    
-    
-def rate_design(request,id):
-    project = Projects.objects.get(id=id)
-    user = request.user
-    
-    if request.method =='POST':
-        form = RateForm(request.POST)
-        
-        if form.is_valid():
-            rate_design = form.save(commit=False)
-            rate_design.user = user
-            rate_design.project = project
-            rate_design.save()
-            return redirect('home')
-        
-    else:
-        form = RateForm()
-        
-        
-    context ={
-        'form':form,
-        'project':project
-    }
-    
-    return render(request, 'app/rate_design.html',context)
 
-def rate_context(request,id):
-    project = Projects.objects.get(id=id)
-    user = request.user
-    
-    if request.method =='POST':
-        form = RateContextForm(request.POST)
-        
-        if form.is_valid():
-            rate_design = form.save(commit=False)
-            rate_design.user = user
-            rate_design.project = project
-            rate_design.save()
-            return redirect('home')
-        
-    else:
-        form = RateContextForm()
-        
-        
-    context ={
-        'form':form,
-        'project':project
-    }
-    
-    return render(request, 'app/rate_context.html',context)
 
-def rate_usability(request,id):
+def rate_project(request, id):
     project = Projects.objects.get(id=id)
     user = request.user
     
     if request.method =='POST':
-        form = RateUsabilityForm(request.POST)
+        form = RatingsForm(request.POST)
         
         if form.is_valid():
             rate_design = form.save(commit=False)
@@ -164,13 +114,6 @@ def rate_usability(request,id):
             return redirect('home')
         
     else:
-        form = RateUsabilityForm()
+        form = RatingsForm()
         
-        
-    context ={
-        'form':form,
-        'project':project
-    }
-    
-    return render(request, 'app/rate_usability.html',context)
-     
+    return render(request, 'app/single.html',{"project":project,"ratingform":form})

@@ -1,6 +1,7 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
+from django.db.models import Avg
 from django.core.validators import MaxValueValidator,MinValueValidator
 
 # Create your models here.
@@ -28,6 +29,19 @@ class Projects(models.Model):
     def __str__(self):
         return str(self.pk)
     
+    def average_of_all_ratings(self):
+        return "{:.1f}".format((float(self.average_of_design_ratings())+float(self.average_of_usability_ratings())+float(self.average_of_content_ratings()))/3)
+    
+    def average_of_design_ratings(self):
+        return "{:.1f}".format(self.ratings.aggregate(models.Avg('rate_design'))['rate_design__avg'] or 0)
+    
+    def average_of_usability_ratings(self):
+        return "{:.1f}".format(self.ratings.aggregate(models.Avg('rate_usability'))['rate_usability__avg'] or 0)
+
+    
+    def average_of_content_ratings(self):
+        return "{:.1f}".format(self.ratings.aggregate(models.Avg('rate_content'))['rate_content__avg'] or 0)
+    
 RATE_CHOICES =[
      (1, '1 - Trash'),
      (2, '2 - Horrible'),
@@ -46,5 +60,10 @@ class Review(models.Model):
     project = models.ForeignKey(Projects,on_delete=models.CASCADE)
     body = models.TextField()
     rate_design = models.PositiveSmallIntegerField(choices=RATE_CHOICES)
-    rate_context = models.PositiveSmallIntegerField(choices=RATE_CHOICES,default=0)
+    rate_content = models.PositiveSmallIntegerField(choices=RATE_CHOICES,default=0)
     rate_usability = models.PositiveSmallIntegerField(choices=RATE_CHOICES,default=0)
+    
+    
+    def average_rating(self):
+        return '{:.1f}'.format((self.rate_design + self.rate_usability + self.rate_content)/3)
+        
