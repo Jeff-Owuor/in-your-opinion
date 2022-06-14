@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView,UpdateView
 from django.urls import reverse_lazy
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import PostSerializer,ProfileSerializer,UserSerializer
+from .serializers import PostSerializer,ProfileSerializer
 from rest_framework import viewsets
 from django.contrib.auth.models import User
 
@@ -18,16 +18,7 @@ class ProfileList(APIView):
         serializers = ProfileSerializer(profiles, many=True)
         return Response(serializers.data)
 
-
-
-class UserViewSet(APIView):
-   def get(self, request, format=None):
-        users = User.objects.all()
-        serializers = UserSerializer(users, many=True)
-        return Response(serializers.data)
-
-
-class PostViewSet(viewsets.ModelViewSet):
+class PostList(APIView):
     def get(self, request, format=None):
         projects = Projects.objects.all()
         serializers = PostSerializer(projects, many=True)

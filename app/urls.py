@@ -1,5 +1,5 @@
 from django.urls import re_path,path
-from .views import register,index,loginPage,projectUpload,logout_user,profile,EditProfileView,rate_project,single_project,search_project,ProfileList
+from .views import register,index,loginPage,projectUpload,logout_user,profile,EditProfileView,rate_project,single_project,search_project,ProfileList,PostList
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -15,6 +15,7 @@ urlpatterns = [
     path('single_project/<int:id>/',single_project, name='single_project'),
     path('search_project/', search_project , name='search_project'),
     re_path(r'^api/profile/$', ProfileList.as_view()),
+    re_path(r'^api/post/$', PostList.as_view()),
 ]
 
 if settings.DEBUG:
