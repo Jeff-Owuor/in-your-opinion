@@ -6,7 +6,33 @@ from .models import Projects,Profile,Review
 from django.http import JsonResponse
 from django.views.generic.edit import CreateView,UpdateView
 from django.urls import reverse_lazy
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import PostSerializer,ProfileSerializer,UserSerializer
+from rest_framework import viewsets
+from django.contrib.auth.models import User
 
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        profiles = Profile.objects.all()
+        serializers = ProfileSerializer(profiles, many=True)
+        return Response(serializers.data)
+
+
+
+class UserViewSet(APIView):
+   def get(self, request, format=None):
+        users = User.objects.all()
+        serializers = UserSerializer(users, many=True)
+        return Response(serializers.data)
+
+
+class PostViewSet(viewsets.ModelViewSet):
+    def get(self, request, format=None):
+        projects = Projects.objects.all()
+        serializers = PostSerializer(projects, many=True)
+        return Response(serializers.data)
+    
 def register(request):
     form = RegisterForm()
     if request.method == 'POST':
@@ -105,6 +131,7 @@ def rate_project(request, id):
         
     return render(request, 'app/rate_project.html',{"project":project,"ratingform":form})
 
+@login_required(login_url='login/')
 def single_project(request,id):
     project = Projects.objects.get(id=id)
     reviews = Review.objects.filter(project=id)
@@ -114,6 +141,7 @@ def single_project(request,id):
         "reviews":reviews
     }
     return render(request,'app/single_project.html',context)
+
 
 
 def search_project(request):

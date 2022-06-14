@@ -20,10 +20,10 @@
               <div class="containerEl">
                   <p>{{review.user.username}} - {{ review.body }}</p>
                   <ul class="unordered">
-                      <li>{{ review.rate_usability }}</li>
-                      <li>{{ review.rate_content }}</li>
-                      <li>{{ review.rate_design }}</li>
-                      <li>{{review.average_rating}}</li>
+                      usability - <li class="border border-dark rounded-circle">  {{ review.rate_usability }}</li>
+                      content - <li class="border border-dark rounded-circle">{{ review.rate_content }}</li>
+                      Design -<li class="border border-dark rounded-circle">{{ review.rate_design }}</li>
+                      Overal rating - <li class="border border-dark rounded-circle">{{review.average_rating}}</li>
                   </ul>
               </div>
               {% endfor %}
