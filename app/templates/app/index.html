@@ -14,49 +14,20 @@
     <div class="container">
       <div class="row">
         {% for project in projects %}
-        <div class="card mb-3">
-
-          <img class="card-img-top" src="{{project.project.url}}" alt="Card image cap">
+        <div class="card text-center" style="width: 28rem;margin:4px 4px;">
+          <h2>{{project.project_title}}</h2>
+          <a href="{% url 'single_project' project.id %}"><img class="card-img-top" src="{{project.project.url}}" alt="Card image cap"></a>
           <div class="card-body">
-            <h5 class="card-title">{{project.project_title}}</h5>
-            <p>{{ project.review_set.Rate_design.count }}</p>
-            <p class="card-text">{{ project.project_description }}</p>
-            <a href="{{ project.site_link }}" >Live Site Link</a>
-            <a href="{% url 'rate_project' project.id %}"><i class="fa fa-star" aria-hidden="true"></i>Rate Project</a>
-            <ul class="single-uservotes-votes">
-              {% if not project.review.all %}
-              <li>No user votes</li>
-              {% else %}
-               {% for user in project.review.all %}
-              <li>
-                  <article class="single-uservotes-votes-li-user">
-                      <div class="single-uservotes-votes-li-user-image">
-                          <img src="{{ user.user.profile.profile_photo.url }}" alt="">
-                      </div>
-                      <div class="single-uservotes-votes-li-user-name">
-                          <p>{{ user.user.username }}</p>
-                      </div>
-                  </article>
-                  <article class="single-uservotes-votes-li-ratings">
-                      <div class="single-uservotes-votes-li-ratings-design">
-                          <button>{{ user.rate_design }}</button>
-                      </div>
-                      <div class="single-uservotes-votes-li-ratings-usability">
-                          <button>{{ user.rate_usability }}</button>
-                      </div>
-                      <div class="single-uservotes-votes-li-ratings-content">
-                          <button>{{ user.rate_content }}</button>
-                      </div>
-                      <div class="single-uservotes-votes-li-ratings-overall">
-                          <h2>{{ user.average_rating }}</h2>
-                      </div>
-                  </article>
-              </li>
-              {% endfor %}
-               {% endif %}
-          </ul>
+            <h2>By {{ project.user.user.username }}</h2>
+            <div style="display:flex;">
+            <a href="{{ project.user.github }}" style="margin:0 4px;color:black"><i class="fa fa-github fa-2x"></i></a>
+            <a href="{{ project.user.instagram }}" style="margin:0 4px;color:black"><i class="fa fa-instagram fa-2x"></i></a>
+            <a href="{{ project.user.linkedin }}" style="margin:0 4px;color:black"><i class="fa fa-linkedin fa-2x"></i></a>
+          </div>
+          <a href="{% url 'rate_project' project.id %}" class="btn btn-secondary"><i class="fa fa-star" aria-hidden="true"></i>Rate Project</a>
           </div>
         </div>
+        
         {% endfor %}
         
       </div>

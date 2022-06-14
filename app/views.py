@@ -46,19 +46,6 @@ def index(request):
     }
     return render(request,'app/index.html',context)
 
-
-def rate_image(request):
-    if request.method == 'POST':
-        element_id = request.post.get('element_id')
-        val = request.post.get('val')
-        obj = Projects.objects.get(id = element_id)
-        obj.score = val
-        obj.save()
-        
-        return JsonResponse({"success":'true','score':val}, safe=False)
-    
-    return JsonResponse({'success':'false'})
-
 @login_required(login_url='login/')
 def projectUpload(request):
     current_user  = request.user
@@ -116,4 +103,12 @@ def rate_project(request, id):
     else:
         form = RatingsForm()
         
-    return render(request, 'app/single.html',{"project":project,"ratingform":form})
+    return render(request, 'app/rate_project.html',{"project":project,"ratingform":form})
+
+def single_project(request,id):
+    project = Projects.objects.get(id=id)
+    
+    context = {
+        "project":project
+    }
+    return render(request,'app/single_project.html',context)
