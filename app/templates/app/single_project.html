@@ -2,6 +2,11 @@
 {% load bootstrap4 %}
 {% load static %}
 
+{% block styles %}
+{% bootstrap_css %}
+   <link rel="stylesheet" href="{% static 'css/single_project.css' %}">
+{% endblock %}
+
 {% block content %}
   <div class="container">
       <div class="row">
@@ -11,6 +16,17 @@
               <h5 class="card-title">{{ project.project_title }}</h5>
               <p class="card-text">{{ project.project_description }}</p>
               <a class="card-text" href="{{project.site_link}}">Visit Site</a>
+              {% for review in reviews %}
+              <div class="containerEl">
+                  <p>{{review.user.username}} - {{ review.body }}</p>
+                  <ul class="unordered">
+                      <li>{{ review.rate_usability }}</li>
+                      <li>{{ review.rate_content }}</li>
+                      <li>{{ review.rate_design }}</li>
+                      <li>{{review.average_rating}}</li>
+                  </ul>
+              </div>
+              {% endfor %}
             </div>
           </div>
       </div>

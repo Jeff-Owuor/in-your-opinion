@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import RegisterForm,UploadProjectForm,RatingsForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout,login,authenticate
-from .models import Projects,Profile
+from .models import Projects,Profile,Review
 from django.http import JsonResponse
 from django.views.generic.edit import CreateView,UpdateView
 from django.urls import reverse_lazy
@@ -107,8 +107,10 @@ def rate_project(request, id):
 
 def single_project(request,id):
     project = Projects.objects.get(id=id)
+    reviews = Review.objects.filter(project=id)
     
     context = {
-        "project":project
+        "project":project,
+        "reviews":reviews
     }
     return render(request,'app/single_project.html',context)
