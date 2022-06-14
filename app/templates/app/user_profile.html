@@ -12,10 +12,29 @@
             <div class="card-body">
               <h5 class="card-title" style="color:black">{{ user.username }}</h5>
               <p class="card-text" style="color:black">{{ user.profile.bio }}</p>
-              
+                  <a href="{{ user.github }}"><i class="fa fa-github fa-3x"></i></a>
+                  <a href="{{ user.instagram }}" ><i class="fa fa-instagram fa-3x"></i></a>
+                  <a href="{{ user.linkedin }}"><i class="fa fa-linkedin fa-3x"></i></a>
             </div>
         </div>
      </div>
+    </div>
+    <div class="row">
+            {% for project in user_posts %}
+            <div class="card text-center" style="width: 28rem;margin:4px 4px;background: transparent;color:rgb(246, 1, 1)">
+                <h2>{{project.project_title}}</h2>
+                <a href="{% url 'single_project' project.id %}"><img class="card-img-top" src="{{project.project.url}}" alt="Card image cap"></a>
+                <div class="card-body">
+                  <div style="display:flex;">
+                  <a href="{{ project.user.github }}" style="margin:0 4px;color:rgb(246, 1, 1)"><i class="fa fa-github fa-3x"></i></a>
+                  <a href="{{ project.user.instagram }}" style="margin:0 4px;color:rgb(246, 1, 1)"><i class="fa fa-instagram fa-3x"></i></a>
+                  <a href="{{ project.user.linkedin }}" style="margin:0 4px;color:rgb(246, 1, 1)"><i class="fa fa-linkedin fa-3x"></i></a>
+                </div>
+                  <a href="{% url 'rate_project' project.id %}" class="btn btn-secondary"><i class="fa fa-star" aria-hidden="true"></i>Rate Project</a>
+                </div>
+              </div>
+              
+            {% endfor %}
     </div>
 </div>
 
