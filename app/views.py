@@ -85,7 +85,7 @@ class EditProfileView(UpdateView):
     success_url = reverse_lazy('home')
     
 
-
+@login_required(login_url='login/')
 def rate_project(request, id):
     project = Projects.objects.get(id=id)
     user = request.user
@@ -114,3 +114,17 @@ def single_project(request,id):
         "reviews":reviews
     }
     return render(request,'app/single_project.html',context)
+
+
+def search_project(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        project = Projects.objects.filter(project_title__icontains=searched).all()
+        params = {
+            'searched':searched,
+            'projects':project
+        }
+        return render(request, 'app/results.html', params)
+    else:
+        message = "You haven't searched for any image category"
+    return render(request, 'app/results.html', {'message': message})

@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom:7px">
+  <a class="nav-link" href="{% url 'home' %}"><img src="https://media.istockphoto.com/photos/scale-symbol-stone-wall-background-picture-id1334163161?b=1&k=20&m=1334163161&s=170667a&w=0&h=ohZa__4A26j76EZOx2LIVyh11TMqp-Ixg92gg5tYJKw=" alt="" srcset="" class="rounded-circle" width="70rem"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -31,8 +31,9 @@
           </div>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'search_project' %}">
+           {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="Search Project" aria-label="Search" name="searched">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
