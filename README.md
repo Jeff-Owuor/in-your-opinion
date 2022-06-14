@@ -40,7 +40,8 @@ To get the application ...
     python3 manage.py test 
 
 ## API Endpoints
-- 
+- https://skillrating.herokuapp.com/api/posts/
+- https://skillrating.herokuapp.com/api/profile/
 
 
 ### Known bugs 
