@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView,UpdateView
 from django.urls import reverse_lazy
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import PostSerializer,ProfileSerializer
+from .serializers import PostSerializer,ProfileSerializer,UserSerializer
 from rest_framework import viewsets
 from django.contrib.auth.models import User
 
@@ -24,6 +24,10 @@ class PostList(APIView):
         serializers = PostSerializer(projects, many=True)
         return Response(serializers.data)
     
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 def register(request):
     form = RegisterForm()
     if request.method == 'POST':

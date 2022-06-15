@@ -1,12 +1,17 @@
-from django.urls import re_path,path
-from .views import register,index,loginPage,projectUpload,logout_user,profile,EditProfileView,rate_project,single_project,search_project,ProfileList,PostList
+from django.urls import re_path,path,include
+from .views import register,index,loginPage,projectUpload,logout_user,profile,EditProfileView,rate_project,single_project,search_project,ProfileList,PostList,UserViewSet
 from django.conf.urls.static import static
 from django.conf import settings
+from rest_framework import routers
 
+router = routers.DefaultRouter()
+router.register('users',UserViewSet)
+ 
 urlpatterns = [
     re_path(r'^$', index , name='home'),
     path('register/', register, name='register'),
     path('login/', loginPage, name='login'),
+    path('api/', include(router.urls)),
     path('post/', projectUpload ,  name='projectUpload'),
     path('logout/',logout_user,name='logout'),
     path('profile/<int:id>/', profile, name="profile"),

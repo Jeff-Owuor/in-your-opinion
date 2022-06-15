@@ -42,6 +42,7 @@ To get the application ...
 ## API Endpoints
 - https://skillrating.herokuapp.com/api/posts/
 - https://skillrating.herokuapp.com/api/profile/
+- https://skillrating.herokuapp.com/api/users/
 
 
 ### Known bugs 
