@@ -21,13 +21,9 @@
             profile
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            {% if user.pk %}
+            <a class="nav-link" href="{% url 'create_profile' %}">Create Profile</a>
               <a class="nav-link" href="{% url 'edit' user.pk %}">Edit Profile</a>
               <a class="nav-link" href="{% url 'profile' user.id %}">Show profile</a>
-              
-            {% else %}
-               <a class="nav-link" href="{% url 'create_profile' %}">Create Profile</a>
-            {% endif %}
             
           </div>
         </li>
