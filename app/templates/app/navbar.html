@@ -16,11 +16,6 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'projectUpload' %}">post</a>
         </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">Login</a>
-        </li>
-        {% endif %}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             profile
@@ -30,6 +25,12 @@
             <a class="nav-link" href="{% url 'profile' user.id %}">Show profile</a>
           </div>
         </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
+   
       </ul>
       <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'search_project' %}">
            {% csrf_token %}
