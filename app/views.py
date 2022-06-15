@@ -22,6 +22,7 @@ class CreateProfilePage(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
     
+    
 class ProfileList(APIView):
     def get(self, request, format=None):
         profiles = Profile.objects.all()
