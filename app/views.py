@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import RegisterForm,UploadProjectForm,RatingsForm
+from .forms import RegisterForm,UploadProjectForm,RatingsForm,CreateProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout,login,authenticate
 from .models import Projects,Profile,Review
@@ -12,6 +12,16 @@ from .serializers import PostSerializer,ProfileSerializer,UserSerializer
 from rest_framework import viewsets
 from django.contrib.auth.models import User
 
+
+class CreateProfilePage(CreateView):
+    model = Profile
+    form_class = CreateProfileForm
+    template_name = 'app/create_user_profile.html'
+    
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
 class ProfileList(APIView):
     def get(self, request, format=None):
         profiles = Profile.objects.all()
