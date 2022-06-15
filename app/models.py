@@ -29,18 +29,19 @@ class Projects(models.Model):
     def __str__(self):
         return str(self.pk)
     
-    def average_of_all_ratings(self):
-        return "{:.1f}".format((float(self.average_of_design_ratings())+float(self.average_of_usability_ratings())+float(self.average_of_content_ratings()))/3)
-    
-    def average_of_design_ratings(self):
-        return "{:.1f}".format(self.ratings.aggregate(models.Avg('rate_design'))['rate_design__avg'] or 0)
-    
-    def average_of_usability_ratings(self):
-        return "{:.1f}".format(self.ratings.aggregate(models.Avg('rate_usability'))['rate_usability__avg'] or 0)
+    def delete_project(self):
+        self.delete()
 
-    
-    def average_of_content_ratings(self):
-        return "{:.1f}".format(self.ratings.aggregate(models.Avg('rate_content'))['rate_content__avg'] or 0)
+    @classmethod
+    def search_project(cls, title):
+        return cls.objects.filter(project_title__icontains=title).all()
+
+    @classmethod
+    def all_projects(cls):
+        return cls.objects.all()
+
+    def save_post(self):
+        self.save()
     
 RATE_CHOICES =[
      (1, '1 - Trash'),
@@ -63,7 +64,11 @@ class Review(models.Model):
     rate_content = models.PositiveSmallIntegerField(choices=RATE_CHOICES,default=0)
     rate_usability = models.PositiveSmallIntegerField(choices=RATE_CHOICES,default=0)
     
-    
+    @classmethod
+    def get_ratings(cls, id):
+        ratings = Review.objects.filter(project_id=id).all()
+        return ratings
+
     def average_rating(self):
         return '{:.1f}'.format((self.rate_design + self.rate_usability + self.rate_content)/3)
         
